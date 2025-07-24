@@ -28,6 +28,14 @@ dependencies {
     // Jackson for JSON
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2")
+
+    //ktor client
+    implementation("io.ktor:ktor-client-core:2.3.10")
+    implementation("io.ktor:ktor-client-cio:2.3.10")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.10")
+
+    //serialization
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.10")
 }
 
 tasks.test {
