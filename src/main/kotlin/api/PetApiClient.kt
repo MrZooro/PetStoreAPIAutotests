@@ -1,8 +1,12 @@
 package org.example.api
 
 import io.ktor.client.*
+import io.ktor.client.call.body
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
@@ -10,10 +14,10 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import org.example.models.Pet
-import org.example.models.PetStatus
+import org.example.models.Pet.PetStatus
 
 /**
- * Клиент для работы с API питомцев PetStore
+ * Клиент для работы с API питомцев PetStore.
  *
  * @see <a href="https://petstore.swagger.io">Swagger PetStore API Documentation</a>
  */
@@ -25,15 +29,23 @@ class PetApiClient {
         install(ContentNegotiation) {
             json(
                 Json {
-                    explicitNulls = false
                     ignoreUnknownKeys = true
+                    explicitNulls = false
                 }
             )
+        }
+        install(Logging) {
+            level = LogLevel.ALL
+            logger = object : Logger {
+                override fun log(message: String) {
+                    println("Ktor LOG: $message")
+                }
+            }
         }
     }
 
     /**
-     * Добавляет нового питомца в магазин
+     * Добавляет нового питомца в магазин.
      *
      * @param [pet] Объект питомца для добавления
      * @return Ответ сервера с созданным питомцем
@@ -46,7 +58,7 @@ class PetApiClient {
     }
 
     /**
-     * Обновляет существующего питомца
+     * Обновляет существующего питомца.
      *
      * @param pet Объект питомца с обновленными данными (должен содержать корректный ID)
      * @return Ответ сервера с обновленным питомцем
@@ -59,7 +71,7 @@ class PetApiClient {
     }
 
     /**
-     * Получает питомца по его идентификатору
+     * Получает питомца по его идентификатору.
      *
      * @param petId Уникальный идентификатор питомца
      * @return Ответ сервера с найденным питомцем
@@ -69,7 +81,7 @@ class PetApiClient {
     }
 
     /**
-     * Удаляет питомца по идентификатору
+     * Удаляет питомца по идентификатору.
      *
      * @param petId Уникальный идентификатор питомца для удаления
      * @return Ответ сервера с результатом операции
@@ -79,7 +91,7 @@ class PetApiClient {
     }
 
     /**
-     * Находит питомцев по статусу
+     * Находит питомцев по статусу.
      *
      * @param petStatus Статус питомцев для поиска
      * @return Ответ сервера со списком питомцев
