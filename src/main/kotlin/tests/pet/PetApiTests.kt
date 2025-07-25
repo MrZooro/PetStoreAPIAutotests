@@ -1,13 +1,13 @@
-package org.example.tests.pet
+package tests.pet
 
 import io.ktor.client.call.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.test.runTest
-import org.example.api.PetApiClient
-import org.example.extensions.step
-import org.example.models.InfoResponse
-import org.example.models.Pet
-import org.example.models.TestDataGenerator
+import api.PetApiClient
+import extensions.step
+import models.InfoResponse
+import models.Pet
+import models.TestDataGenerator
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 

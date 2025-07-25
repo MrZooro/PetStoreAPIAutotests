@@ -1,4 +1,4 @@
-package org.example.extensions
+package extensions
 
 /**
  * Выполняет логирование и выполнение шага теста с поддержкой корутин.
